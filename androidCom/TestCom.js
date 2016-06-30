@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 
-import TestCom from './androidCom/TestCom';
-import DrawerCom from './androidCom/DrawerCom';
-
-class rnHouse extends Component {
+export default class TestCom extends Component {
   render() {
     return (
-      <DrawerCom />
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          This is a test component
+        </Text>
+      </View>
     );
   }
 }
@@ -23,7 +23,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   }
 });
-
-AppRegistry.registerComponent('rnHouse', () => rnHouse);
