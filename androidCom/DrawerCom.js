@@ -13,7 +13,8 @@ import {
 import DrawerMenuCom from './DrawerMenuCom';
 import IndexPage from './Page/IndexPage';
 import TestPage from './Page/TestPage';
-import Slider from './Page/Slider';
+import PageSlider from './Page/PageSlider';
+import ImageSlider from './Page/ImageSlider';
 
 
 export default class DrawerCom extends Component {
@@ -44,8 +45,11 @@ export default class DrawerCom extends Component {
             case 'Test':
                 return (<TestPage navigator={nav} {...this.props} {...route.passProps} />);
                 break;
-            case 'Slider':
-                return (<Slider navigator={nav} {...this.props} {...route.passProps} />);
+            case 'PageSlider':
+                return (<PageSlider navigator={nav} {...this.props} {...route.passProps} />);
+                break;
+            case 'ImageSlider':
+                return (<ImageSlider navigator={nav} {...this.props} {...route.passProps} />);
                 break;
         }
   	}
@@ -55,9 +59,10 @@ export default class DrawerCom extends Component {
     var navigationView = (
       <View style={{flex: 1, backgroundColor: '#fff'}}>
         <DrawerMenuCom />
-        <TouchableHighlight underlayColor="#0a8acd" activeOpacity={1} onPress={() => this.goTo({id: 'Index'})}><Text>Index</Text></TouchableHighlight>
-        <TouchableHighlight underlayColor="#0a8acd" activeOpacity={1} onPress={() => this.goTo({id: 'Test'})}><Text>Test</Text></TouchableHighlight>
-        <TouchableHighlight underlayColor="#0a8acd" activeOpacity={1} onPress={() => this.goTo({id: 'Slider'})}><Text>Slider</Text></TouchableHighlight>
+        <TouchableHighlight underlayColor="#0a8acd" activeOpacity={1} onPress={() => this.goTo({id: 'Index'})}><Text style={styles.testLink}>Index</Text></TouchableHighlight>
+        <TouchableHighlight underlayColor="#0a8acd" activeOpacity={1} onPress={() => this.goTo({id: 'Test'})}><Text style={styles.testLink}>Test</Text></TouchableHighlight>
+        <TouchableHighlight underlayColor="#0a8acd" activeOpacity={1} onPress={() => this.goTo({id: 'PageSlider'})}><Text style={styles.testLink}>PageSlider</Text></TouchableHighlight>
+        <TouchableHighlight underlayColor="#0a8acd" activeOpacity={1} onPress={() => this.goTo({id: 'ImageSlider'})}><Text style={styles.testLink}>ImageSlider</Text></TouchableHighlight>
       </View>
     );
     return (
@@ -95,5 +100,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },
+  testLink:{
+    fontSize:14,
+    padding:10
   }
 });

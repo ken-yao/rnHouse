@@ -3,18 +3,18 @@ import { StyleSheet, Text, View} from 'react-native';
 
 import Swiper from 'react-native-swiper';
 
-export default class Slider extends Component {
+export default class PageSlider extends Component {
   render() {
     return (
-        <Swiper style={styles.wrapper} index={0} showsButtons={true}>
+        <Swiper style={styles.wrapper} index={0} showsButtons={true} loop={true} autoplay={false}>
             <View style={styles.slide1}>
-                <Text style={styles.text}>1</Text>
+                <Text style={styles.text}>Slider Page 1</Text>
             </View>
             <View style={styles.slide2}>
-                <Text style={styles.text}>2</Text>
+                <Text style={styles.text}>Slider Page 2</Text>
             </View>
             <View style={styles.slide3}>
-                <Text style={styles.text}>3</Text>
+                <Text style={styles.text}>Slider Page 3</Text>
             </View>
         </Swiper>
     );
