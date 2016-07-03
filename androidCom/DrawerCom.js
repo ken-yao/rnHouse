@@ -12,6 +12,10 @@ import {
 
 import DrawerMenuCom from './DrawerMenuCom';
 import IndexPage from './Page/IndexPage';
+import HouseMainPage from './Page/HouseMainPage';
+import HouseLdPage from './Page/HouseLdPage';
+
+
 import TestPage from './Page/TestPage';
 import PageSlider from './Page/PageSlider';
 import ImageSlider from './Page/ImageSlider';
@@ -40,7 +44,13 @@ export default class DrawerCom extends Component {
   renderScene(route, nav) {
         switch (route.id){
             case 'Index':
-                return (<IndexPage navigator={nav} {...this.props} {...route.passProps} />);
+                return (<IndexPage navigator={nav} {...this.props} {...route.passProps} openDrawer={this.openDrawer.bind(this)} />);
+                break;
+            case 'HouseMain':
+                return (<HouseMainPage navigator={nav} {...this.props} {...route.passProps} />);
+                break;
+            case 'HouseLd':
+                return (<HouseLdPage navigator={nav} {...this.props} {...route.passProps} />);
                 break;
             case 'Test':
                 return (<TestPage navigator={nav} {...this.props} {...route.passProps} />);
