@@ -62,6 +62,7 @@ export default class HouseMainPage extends Component {
 
 	render() {
 		return (
+			<View style={{flex:1}}>
 			<ScrollView>
 				<View>
 					<View style={styles.mainImageContainer}>
@@ -72,15 +73,10 @@ export default class HouseMainPage extends Component {
 					</View>
 				</View>
 				<View>
-					<View style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height * 11/20-26}}>
-						<Image style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height * 11/20-26}} source={require('../../img/housebg.jpg')} />
-
-						<View style={styles.buttonContainer}>
-							<TouchableHighlight style={[styles.button,{marginRight:1}]} onPress={this._onPressLd.bind(this)}><Text style={styles.buttonText}>免费预约,得优惠</Text></TouchableHighlight>
-							<TouchableHighlight style={[styles.button,{marginLeft:1}]}><Text style={styles.buttonText}>查看楼盘详情</Text></TouchableHighlight>
-						</View>
+					<View style={{flex:1}}>
+						<Image style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height * 11/20-62}} source={require('../../img/housebg.jpg')} />
 					</View>
-					<View style={{position:'absolute',top:0,left:0,width:Dimensions.get('window').width, height: Dimensions.get('window').height * 11/20 - 60}}>
+					<View style={{position:'absolute',top:0,left:0,width:Dimensions.get('window').width}}>
 						<View style={styles.houseDescContainer}>
 							<View style={styles.houseFeaturedContainer}>
 								{this.state.house_description.map((elem, index) => {
@@ -118,6 +114,11 @@ export default class HouseMainPage extends Component {
 					</View>
 				</View>
 			</ScrollView>
+			<View style={styles.buttonContainer}>
+				<TouchableHighlight style={[styles.button,{marginRight:1}]} onPress={this._onPressLd.bind(this)}><Text style={styles.buttonText}>免费预约,得优惠</Text></TouchableHighlight>
+				<TouchableHighlight style={[styles.button,{marginLeft:1}]}><Text style={styles.buttonText}>查看楼盘详情</Text></TouchableHighlight>
+			</View>
+			</View>
 		);
 	}
 }
@@ -128,13 +129,13 @@ const styles = StyleSheet.create({
 	houseMainImage:{width:Dimensions.get('window').width,height:Dimensions.get('window').height * 9/20},
 	houseDescContainer:{flex:1, margin:20},
 	houseFeaturedContainer:{flexDirection:'row'},
-	houseInfoContainer:{flex:1,marginTop:16,},
+	houseInfoContainer:{flex:1,marginTop:16,height:200},
 	houseInfoRow:{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center',borderBottomWidth:0.5,borderColor:'#fff'},
 	houseInfoHxRow:{flex:1,flexDirection:'row',alignItems:'center',borderBottomWidth:0.5,borderColor:'#fff'},
 	houseInfoText:{color:'#fff',fontSize:16,lineHeight:24},
 	houseDescItem:{borderWidth:1,borderColor:'#fff',borderRadius:2,paddingVertical:2,paddingHorizontal:4,marginRight:8,},
 	houseDescItemText:{color:'#fff',fontSize:16},
-	buttonContainer:{width:Dimensions.get('window').width,position:'absolute', bottom:0, left:0, flexDirection: 'row',justifyContent:'center',height:45},
+	buttonContainer:{width:Dimensions.get('window').width, flexDirection: 'row',justifyContent:'center',height:45},
 	button:{flex:1,justifyContent:'center',alignItems:'center', backgroundColor:'#fec900',height:45},
 	buttonText:{textAlign:'center'}
 });
