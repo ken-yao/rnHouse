@@ -20,7 +20,7 @@ export default class HouseTopBar extends Component {
 
 	render() {
 		return (
-			<View style={{height:44,flexDirection:'row', alignItems:'center', justifyContent:'space-between', backgroundColor:'rgba(255,255,255,1)'}}>
+			<View style={{height:44,flexDirection:'row', alignItems:'center', justifyContent:'space-between', backgroundColor:'rgba(244,244,244,1)'}}>
 				<View style={{flexDirection:'row', alignItems:'center'}}>
 					<TouchableOpacity onPress={this._goBack.bind(this)}>
 						<Icon name="ios-arrow-back" size={32} color="#444" style={{marginHorizontal: 10}} />

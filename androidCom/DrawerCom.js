@@ -14,6 +14,9 @@ import DrawerMenuCom from './DrawerMenuCom';
 import IndexPage from './Page/IndexPage';
 import HouseMainPage from './Page/HouseMainPage';
 import HouseLdPage from './Page/HouseLdPage';
+import HouseHxPage from './Page/HouseHxPage';
+import HouseDetailPage from './Page/HouseDetailPage';
+import HouseAllDetailPage from './Page/HouseAllDetailPage';
 
 
 import TestPage from './Page/TestPage';
@@ -52,6 +55,16 @@ export default class DrawerCom extends Component {
             case 'HouseLd':
                 return (<HouseLdPage navigator={nav} {...this.props} {...route.passProps} />);
                 break;
+            case 'HouseHx':
+                return (<HouseHxPage navigator={nav} {...this.props} {...route.passProps} />);
+                break;
+            case 'HouseDetail':
+                return (<HouseDetailPage navigator={nav} {...this.props} {...route.passProps} />);
+                break;
+            case 'HouseAllDetail':
+                return (<HouseAllDetailPage navigator={nav} {...this.props} {...route.passProps} />);
+                break;
+
             case 'Test':
                 return (<TestPage navigator={nav} {...this.props} {...route.passProps} />);
                 break;

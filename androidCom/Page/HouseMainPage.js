@@ -4,6 +4,7 @@ import {StyleSheet,Text,View, ScrollView, Image,Dimensions,TouchableHighlight, T
 import HouseTopBar from '../Partial/HouseTopBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HouseLdPage from './HouseLdPage';
+import HouseDetailPage from './HouseDetailPage';
 
 var APP_INFO = {
 	apiUrl: 'http://app.anjia0769.com/api',
@@ -47,18 +48,47 @@ export default class HouseMainPage extends Component {
 			.done();
 	}
 
-	//点击跳转
+	//点击跳转楼栋页
 	_onPressLd(){
 		this.props.navigator.push({
 			id: 'HouseLd',
 			title: '楼栋信息页',
-			component: HouseLdPage,
+			component: HouseDetailPage,
 			passProps:{
 				navigator: this.props.navigator,
-				houseInfo: this.state.houseInfo,
+				house_id: this.state.houseInfo.house_id,
+				house_name: this.state.houseInfo.house_name,
+				house_average_price: this.state.houseInfo.house_average_price,
+				house_distribution_image_source_url: this.state.houseInfo.house_distribution_image_source_url,
+				buildings: this.state.houseInfo.buildings,
+				apartments: this.state.houseInfo.apartments
 			}
 		});
 	}
+
+	//点击跳转详情页
+	_onPressDetail(){
+        this.props.navigator.push({
+            id: 'HouseAllDetail',
+            title: '楼盘详情页',
+            component: HouseLdPage,
+            passProps:{
+                navigator: this.props.navigator,
+                house_id: this.state.houseInfo.house_id,
+                house_name: this.state.houseInfo.house_name,
+                house_average_price: this.state.houseInfo.house_average_price,
+                house_open_time:this.state.houseInfo.house_open_time,
+                house_newest_open_time:this.state.houseInfo.house_newest_open_time,
+                house_handing_time:this.state.houseInfo.house_handing_time,
+                house_address: this.state.houseInfo.house_address,
+                house_featured: this.state.houseInfo.house_featured,
+                house_apartment_styles:this.state.houseInfo.house_apartment_styles,
+                houseInfo: this.state.houseInfo,
+                ybj: this.state.houseInfo.ybj,
+                sjt: this.state.houseInfo.sjt
+            }
+        });
+    }
 
 	render() {
 		return (
@@ -115,8 +145,8 @@ export default class HouseMainPage extends Component {
 				</View>
 			</ScrollView>
 			<View style={styles.buttonContainer}>
-				<TouchableHighlight style={[styles.button,{marginRight:1}]} onPress={this._onPressLd.bind(this)}><Text style={styles.buttonText}>免费预约,得优惠</Text></TouchableHighlight>
-				<TouchableHighlight style={[styles.button,{marginLeft:1}]}><Text style={styles.buttonText}>查看楼盘详情</Text></TouchableHighlight>
+				<TouchableOpacity style={[styles.button,{marginRight:1}]} onPress={this._onPressLd.bind(this)}><Text style={styles.buttonText}>免费预约,得优惠</Text></TouchableOpacity>
+				<TouchableOpacity style={[styles.button,{marginLeft:1}]} onPress={this._onPressDetail.bind(this)}><Text style={styles.buttonText}>查看楼盘详情</Text></TouchableOpacity>
 			</View>
 			</View>
 		);
