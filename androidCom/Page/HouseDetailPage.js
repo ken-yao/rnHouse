@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {StyleSheet,Text,View, ScrollView, Image,Dimensions,TouchableHighlight, TouchableOpacity} from 'react-native';
 
 import HouseDetailTopBar from '../Partial/HouseDetailTopBar';
+import NetWorkImage from '../Partial/NetWorkImage';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Swiper from 'react-native-swiper';
+//import Swiper from 'react-native-swiper';
 
 
 var {width, height} = Dimensions.get('window');
@@ -14,12 +15,15 @@ export default class HouseDetailPage extends Component {
 
 		this.state = {
 			house_id: this.props.house_id,
-			isLoaded: false
+			isLoaded: false,
+			house_apartment_styles:[]
 		};
 	}
 
 	componentDidMount(){
-        console.log(this.props)
+        this.setState({
+            house_apartment_styles: this.props.house_apartment_styles
+        });
     }
 
 	render() {
@@ -28,16 +32,8 @@ export default class HouseDetailPage extends Component {
                 <View style={styles.topBar}>
                     <HouseDetailTopBar navigator={this.props.navigator} house_name={this.props.house_name} house_average_price={this.props.house_average_price} />
                 </View>
-                <ScrollView>
-                    <Swiper style={styles.wrapper} height={320} autoplay={false} showsButtons={false} showsPagination={true} loop={false}>
-                        {this.props.ybj.map((elem, index) => {
-                            return (
-                                <View key={index} style={styles.slide}>
-                                    <Image style={styles.image} source={{uri: elem}} />
-                                </View>
-                            );
-                        })}
-                    </Swiper>
+                <View>
+                    <NetWorkImage style={{flex:1}} source={this.props.source} />
                     <View style={styles.descContainer}>
                         <Text style={{fontSize:22,color:'#222'}}>￥{this.props.house_average_price}元</Text>
                         <Text style={styles.descText}>楼盘地址：{this.props.house_address}</Text>
@@ -45,9 +41,9 @@ export default class HouseDetailPage extends Component {
                         <Text style={styles.descText}>交楼时间：{this.props.house_handing_time}</Text>
                         <View style={{flex:1,flexDirection:'row',height:24,alignItems:'center'}}>
                             <Text>所有户型：</Text>
-                            {this.props.house_apartment_styles.map((elem, i) => {
+                            {this.state.house_apartment_styles.map((elem, i) => {
                                 return (
-                                    <View key={i} style={[styles.itemContainer, styles.hxItem]}><Text>{elem}</Text></View>
+                                    <View key={i} style={[styles.itemContainer, styles.hxItem]}><Text style={{fontSize:12}}>{elem}</Text></View>
                                 );
                             })}
                         </View>
@@ -55,12 +51,12 @@ export default class HouseDetailPage extends Component {
                             <Text>户型特色：</Text>
                             {this.props.house_featured.map((ft, i) => {
                                 return (
-                                    <View key={i} style={[styles.itemContainer, styles.ftItem]}><Text>{ft}</Text></View>
+                                    <View key={i} style={[styles.itemContainer, styles.ftItem]}><Text style={{fontSize:12}}>{ft}</Text></View>
                                 );
                             })}
                         </View>
                     </View>
-                </ScrollView>
+                </View>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight style={[styles.button,{marginRight:1}]}><Text style={styles.buttonText}>免费预约,得优惠</Text></TouchableHighlight>
                 </View>
@@ -77,7 +73,7 @@ const styles = StyleSheet.create({
 	slide:{flex:1,justifyContent: 'center',backgroundColor: 'transparent'},
 	image:{flex:1},
 	descContainer:{padding:16, paddingBottom:0},
-	itemContainer:{borderWidth:0.8,marginRight:8,paddingHorizontal: 4, justifyContent:'center',alignItems:'center',borderRadius:2},
+	itemContainer:{borderWidth:0.8,marginRight:8,paddingHorizontal: 4, justifyContent:'center',alignItems:'center',borderRadius:2, width:50},
 	hxItem:{borderColor:'#c88a14'},
 	ftItem:{borderColor:'#dd3333'},
 	descText:{lineHeight:24}

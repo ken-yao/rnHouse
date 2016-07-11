@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View, ScrollView, Image,Dimensions,TouchableHighlight, TouchableOpacity} from 'react-native';
+import {StyleSheet,Text,View, ScrollView, Image,Dimensions,TouchableHighlight, TouchableOpacity, Modal} from 'react-native';
 
 import HouseTopBar from '../Partial/HouseTopBar';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -22,7 +22,8 @@ export default class HouseMainPage extends Component {
 			houseInfo: {},
 			isLoaded: false,
 			house_description:[],
-			house_apartment_styles:[]
+			house_apartment_styles:[],
+			modalVisible:false
 		};
 	}
 
@@ -67,7 +68,7 @@ export default class HouseMainPage extends Component {
 	}
 
 	//点击跳转详情页
-	_onPressDetail(){
+		_onPressDetail(){
         this.props.navigator.push({
             id: 'HouseAllDetail',
             title: '楼盘详情页',
@@ -89,6 +90,13 @@ export default class HouseMainPage extends Component {
             }
         });
     }
+
+		_setModalVisible(visible) {
+			this.setState({
+				modalVisible: visible
+			});
+		}
+
 
 	render() {
 		return (
@@ -130,7 +138,7 @@ export default class HouseMainPage extends Component {
 										);
 									})}
 								</View>
-								<TouchableOpacity style={styles.houseInfoRow}>
+								<TouchableOpacity style={styles.houseInfoRow} onPress={()=>this._setModalVisible(true)}>
 									<Text style={styles.houseInfoText}>更多楼盘信息</Text>
 									<Icon name="ios-arrow-forward" size={26} color="#fff" />
 								</TouchableOpacity>
@@ -148,6 +156,104 @@ export default class HouseMainPage extends Component {
 				<TouchableOpacity style={[styles.button,{marginRight:1}]} onPress={this._onPressLd.bind(this)}><Text style={styles.buttonText}>免费预约,得优惠</Text></TouchableOpacity>
 				<TouchableOpacity style={[styles.button,{marginLeft:1}]} onPress={this._onPressDetail.bind(this)}><Text style={styles.buttonText}>查看楼盘详情</Text></TouchableOpacity>
 			</View>
+
+			<Modal
+			  animationType='slide'
+			  transparent={true}
+			  visible={this.state.modalVisible}
+				onRequestClose={() => {this._setModalVisible(false)}}
+			  >
+			  <View style={{flex:1,width:Dimensions.get('window').width, backgroundColor:'rgba(255,255,255,1)'}}>
+					<View style={{justifyContent:'center',height:40,paddingLeft:10,width:Dimensions.get('window').width, backgroundColor:'#ffcc00'}}>
+						<Text style={{color:'#444'}} onPress={this._setModalVisible.bind(this, false)}>关闭</Text>
+					</View>
+
+					<ScrollView style={styles.infoContainer}>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>开发商</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_develop_name}</Text>
+						</View>
+
+						<View style={styles.infoDivider}></View>
+
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>楼盘状态</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_sale_status}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>参考均价</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_average_price}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>最新开盘</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_open_time}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>最早交房</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_handing_time}</Text>
+						</View>
+
+						<View style={styles.infoDivider}></View>
+
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>楼盘地址</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_address}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>售楼处地址</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_sales_address}</Text>
+						</View>
+
+						<View style={styles.infoDivider}></View>
+
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>产权年限</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_limit_years}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>装修标准</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_decoration_status}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>容积率</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_volume}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>绿化率</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_green}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>规划户数</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_plan_family}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>规划车位</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_parking_num}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>物业类型</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_type}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>物业公司</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_company}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>物业费</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_fee}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>供暖方式</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_heat}</Text>
+						</View>
+						<View style={styles.infoRow}>
+							<Text style={styles.infoTitle}>水电燃气</Text>
+							<Text style={styles.infoContent}>{this.state.houseInfo.house_water}</Text>
+						</View>
+			    </ScrollView>
+			  </View>
+			</Modal>
+
 			</View>
 		);
 	}
@@ -167,5 +273,10 @@ const styles = StyleSheet.create({
 	houseDescItemText:{color:'#fff',fontSize:16},
 	buttonContainer:{width:Dimensions.get('window').width, flexDirection: 'row',justifyContent:'center',height:45},
 	button:{flex:1,justifyContent:'center',alignItems:'center', backgroundColor:'#fec900',height:45},
-	buttonText:{textAlign:'center'}
+	buttonText:{textAlign:'center'},
+	infoContainer:{backgroundColor:'#eee'},
+	infoRow:{flexDirection:'row', borderBottomWidth:0.5, borderColor:'#ddd',backgroundColor:'#fff',height:32,paddingHorizontal:10,justifyContent:'center',alignItems:'center'},
+	infoDivider:{height:10},
+	infoTitle:{width:80},
+	infoContent:{flex:1}
 });
